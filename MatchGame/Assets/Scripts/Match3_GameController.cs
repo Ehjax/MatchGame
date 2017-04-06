@@ -266,7 +266,7 @@ public class Match3_GameController : MonoBehaviour
     // Finds out exactly how many blocks are involved in a chain of matches and determines how many resources to be applyed.
     private void HandleMatchScores(List<Transform> matches)
     {
-        Resources.SINGLETON.AdjustCurrResource(matches[0].GetComponent<Match3_Block>().Type, matches.Count);
+        Resources.SINGLETON.AdjustCurrResource(matches[0].GetComponent<Match3_Block>().Type, matches.Count * matches[0].GetComponent<Match3_Block>().Amount);
         foreach (Transform block in matches) block.GetComponent<Match3_Block>().ResourceHandled = true;
     }
 

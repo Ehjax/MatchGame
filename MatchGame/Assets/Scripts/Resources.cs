@@ -113,21 +113,25 @@ public class Resources : MonoBehaviour
             case BlockTypes.Wood:
                 woodTotal += amount;
                 if (woodTotal < 0) woodTotal = 0;
+                PlayerPrefs.SetInt("woodTotal", woodTotal);
                 PrintDebugMsg("New total wood: " + woodCurr);
                 break;
             case BlockTypes.Gold:
                 goldTotal += amount;
                 if (goldTotal < 0) goldTotal = 0;
+                PlayerPrefs.SetInt("goldTotal", goldTotal);
                 PrintDebugMsg("New total gold: " + goldCurr);
                 break;
             case BlockTypes.Stone:
                 stoneTotal += amount;
                 if (stoneTotal < 0) stoneTotal = 0;
+                PlayerPrefs.SetInt("stoneTotal", stoneTotal);
                 PrintDebugMsg("New total stone: " + stoneCurr);
                 break;
             case BlockTypes.Food:
                 foodTotal += amount;
                 if (foodTotal < 0) foodTotal = 0;
+                PlayerPrefs.SetInt("foodTotal", foodTotal);
                 PrintDebugMsg("New total food: " + foodCurr);
                 break;
         }
@@ -138,8 +142,6 @@ public class Resources : MonoBehaviour
     // Takes the current resources from this round and applies it to the total resources for each.
     public void EndRound()
     {
-        currMoves = maxMoves;
-
         AdjustTotalResource(BlockTypes.Wood, woodCurr);
         woodCurr = 0;
         AdjustTotalResource(BlockTypes.Gold, goldCurr);
@@ -151,6 +153,12 @@ public class Resources : MonoBehaviour
 
         endRoundText.SetActive(true);
 
+        UpdateUI();
+    }
+    // Resets the board and starts the round again.
+    public void RestartRound()
+    {
+        currMoves = maxMoves;
         UpdateUI();
     }
     #endregion
