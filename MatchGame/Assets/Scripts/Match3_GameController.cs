@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class Match3_GameController : MonoBehaviour
 {
@@ -120,6 +121,22 @@ public class Match3_GameController : MonoBehaviour
         }
 
         return false;
+    }
+
+    // Re-loads the Match3 scene.
+    public void RestartRound()
+    {
+        SceneManager.LoadScene(1);
+    }
+    // Loads the city
+    public void LoadCity()
+    {
+
+    }
+    // Load the main menu scene.
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
     #endregion
 

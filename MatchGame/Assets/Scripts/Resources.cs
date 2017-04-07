@@ -161,16 +161,6 @@ public class Resources : MonoBehaviour
 
         UpdateUI();
     }
-    // Re-loads the Match3 scene.
-    public void RestartRound()
-    {
-        SceneManager.LoadScene(1);
-    }
-    // Load the main menu scene.
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
     #endregion
 
     #region Private
@@ -205,6 +195,12 @@ public class Resources : MonoBehaviour
         PlayerPrefs.DeleteKey("goldTotal");
         PlayerPrefs.DeleteKey("stoneTotal");
         PlayerPrefs.DeleteKey("foodTotal");
+    }
+
+    // Reads the saved upgrades fromt the city and applies each one that is enabled.
+    private void LoadUpgrades()
+    {
+
     }
     #endregion
 
