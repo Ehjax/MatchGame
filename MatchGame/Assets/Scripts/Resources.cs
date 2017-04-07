@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Resources : MonoBehaviour
 {
@@ -40,7 +41,7 @@ public class Resources : MonoBehaviour
     [Tooltip("Shows the food for the current round.")]
     public Text foodCurrUI = null;
 
-    public GameObject endRoundText = null;
+    public GameObject endRoundPanel = null;
     #endregion
 
     #region Private
@@ -51,6 +52,11 @@ public class Resources : MonoBehaviour
     private int goldTotal = 0;
     private int stoneTotal = 0;
     private int foodTotal = 0;
+
+    private int preWoodTotal = 0;
+    private int preGoldTotal = 0;
+    private int preStoneTotal = 0;
+    private int preFoodTotal = 0;
 
     private int woodCurr = 0;
     private int goldCurr = 0;
@@ -111,24 +117,28 @@ public class Resources : MonoBehaviour
         switch (type)
         {
             case BlockTypes.Wood:
+                preWoodTotal = woodTotal;
                 woodTotal += amount;
                 if (woodTotal < 0) woodTotal = 0;
                 PlayerPrefs.SetInt("woodTotal", woodTotal);
                 PrintDebugMsg("New total wood: " + woodCurr);
                 break;
             case BlockTypes.Gold:
+                preGoldTotal = goldTotal;
                 goldTotal += amount;
                 if (goldTotal < 0) goldTotal = 0;
                 PlayerPrefs.SetInt("goldTotal", goldTotal);
                 PrintDebugMsg("New total gold: " + goldCurr);
                 break;
             case BlockTypes.Stone:
+                preStoneTotal = stoneTotal;
                 stoneTotal += amount;
                 if (stoneTotal < 0) stoneTotal = 0;
                 PlayerPrefs.SetInt("stoneTotal", stoneTotal);
                 PrintDebugMsg("New total stone: " + stoneCurr);
                 break;
             case BlockTypes.Food:
+                preFoodTotal = foodTotal;
                 foodTotal += amount;
                 if (foodTotal < 0) foodTotal = 0;
                 PlayerPrefs.SetInt("foodTotal", foodTotal);
@@ -143,23 +153,23 @@ public class Resources : MonoBehaviour
     public void EndRound()
     {
         AdjustTotalResource(BlockTypes.Wood, woodCurr);
-        woodCurr = 0;
         AdjustTotalResource(BlockTypes.Gold, goldCurr);
-        goldCurr = 0;
         AdjustTotalResource(BlockTypes.Stone, stoneCurr);
-        stoneCurr = 0;
         AdjustTotalResource(BlockTypes.Food, foodCurr);
-        foodCurr = 0;
 
-        endRoundText.SetActive(true);
+        endRoundPanel.SetActive(true);
 
         UpdateUI();
     }
-    // Resets the board and starts the round again.
+    // Re-loads the Match3 scene.
     public void RestartRound()
     {
-        currMoves = maxMoves;
-        UpdateUI();
+        SceneManager.LoadScene(1);
+    }
+    // Load the main menu scene.
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
     #endregion
 
@@ -169,15 +179,32 @@ public class Resources : MonoBehaviour
     {
         movesUI.text = "Moves remaining: " + currMoves;
 
-        woodTotalUI.text = "Total wood: " + woodTotal;
-        goldTotalUI.text = "Total gold: " + goldTotal;
-        stoneTotalUI.text = "Total stone: " + stoneTotal;
-        foodTotalUI.text = "Total food: " + foodTotal;
+        woodTotalUI.text = "Total wood: " + preWoodTotal + " + " + woodCurr + " = " + woodTotal;
+        goldTotalUI.text = "Total gold: " + preGoldTotal + " + " + goldCurr + " = " + goldTotal;
+        stoneTotalUI.text = "Total stone: " + preStoneTotal + " + " + stoneCurr + " = " + stoneTotal;
+        foodTotalUI.text = "Total food: " + preFoodTotal + " + " + foodCurr + " = " + foodTotal;
 
         woodCurrUI.text = "Wood: " + woodCurr;
         goldCurrUI.text = "Gold: " + goldCurr;
         stoneCurrUI.text = "Stone: " + stoneCurr;
         foodCurrUI.text = "Food: " + foodCurr;
+    }
+
+    // Loads the resource totals from PlayerPrefs
+    private void LoadSavedTotals()
+    {
+        woodTotal = PlayerPrefs.GetInt("woodTotal");
+        goldTotal = PlayerPrefs.GetInt("goldTotal");
+        stoneTotal = PlayerPrefs.GetInt("stoneTotal");
+        foodTotal = PlayerPrefs.GetInt("foodTotal");
+    }
+    // Deletes all the total resources
+    private void DeleteSavedTotals()
+    {
+        PlayerPrefs.DeleteKey("woodTotal");
+        PlayerPrefs.DeleteKey("goldTotal");
+        PlayerPrefs.DeleteKey("stoneTotal");
+        PlayerPrefs.DeleteKey("foodTotal");
     }
     #endregion
 
@@ -202,7 +229,10 @@ public class Resources : MonoBehaviour
     #endregion
 
     #region UnityFunctions
-
+    private void OnApplicationQuit()
+    {
+        DeleteSavedTotals();
+    }
     #endregion
 
     #region Start_Update
@@ -219,6 +249,8 @@ public class Resources : MonoBehaviour
     {
         maxMoves = startingMoves;
         currMoves = maxMoves;
+
+        LoadSavedTotals();
 
         UpdateUI();
     }
