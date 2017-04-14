@@ -15,12 +15,12 @@ public class Buy_Windmill : MonoBehaviour {
 	public void TaskOnClick(){
 		Debug.Log ("You bought a windmill!");
 
-		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("windmillPrefab")) 
+		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Windmill")) 
 		{
 			Instantiate (windmillPrefab, new Vector3 (223, 2, 206), Quaternion.identity);
 			//Purchase.gameObject.SetActive(false);
 			GetComponent<Image> ().color = Color.red;
-			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("windmillPrefab");
+			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Windmill");
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{

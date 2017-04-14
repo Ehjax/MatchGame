@@ -131,7 +131,7 @@ public class Match3_GameController : MonoBehaviour
     // Loads the city
     public void LoadCity()
     {
-
+        SceneManager.LoadScene("City_Final");
     }
     // Load the main menu scene.
     public void LoadMainMenu()
