@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu2 : MonoBehaviour
 {
     #region GlobalVareables
     #region DefaultVareables
@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
     // Loads the first level (Match 3)'s scene.
     public void StartGame()
     {
-        SceneManager.LoadScene("match3");
+		SceneManager.LoadScene("City_Final");
     }
     #endregion
 
