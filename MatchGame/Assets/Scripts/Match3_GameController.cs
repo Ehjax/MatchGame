@@ -24,6 +24,11 @@ public class Match3_GameController : MonoBehaviour
     public int columns = 5;
     public float blockSpeed = 5;
 
+    public AudioClip slidingSound = null;
+    public AudioClip matchSound = null;
+    public AudioClip endRoundSound = null;
+    public AudioClip buttonSound = null;
+    public float soundDelay = .25f;
     public GameObject[] spawnableBlocks;
     #endregion
 
@@ -36,6 +41,10 @@ public class Match3_GameController : MonoBehaviour
 
     private bool isPlaying = true;
     private bool endedRound = false;
+
+    private string menuLoad = "";
+
+    private float lastButton = 0;
     #endregion
     #endregion
 
@@ -88,6 +97,8 @@ public class Match3_GameController : MonoBehaviour
         if (!possibleMove) PrintDebugMsg("Not a possible move!");
         else
         {
+            PlaySound(slidingSound);
+
             Transform swipedObj = blocks[swipedObjCoords[0], swipedObjCoords[1]];
             Match3_Block swipedObjScript = blocks[swipedObjCoords[0], swipedObjCoords[1]].GetComponent<Match3_Block>();
             Transform otherObj = blocks[otherObjCoords[0], otherObjCoords[1]];
@@ -126,17 +137,23 @@ public class Match3_GameController : MonoBehaviour
     // Re-loads the Match3 scene.
     public void RestartRound()
     {
-        SceneManager.LoadScene(1);
+        PlaySound(buttonSound);
+        menuLoad = "Restart";
+        lastButton = Time.time;
     }
     // Loads the city
     public void LoadCity()
     {
-        SceneManager.LoadScene("City_Final");
+        PlaySound(buttonSound);
+        menuLoad = "City";
+        lastButton = Time.time;
     }
     // Load the main menu scene.
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(0);
+        PlaySound(buttonSound);
+        menuLoad = "MainMenu";
+        lastButton = Time.time;
     }
     #endregion
 
@@ -273,6 +290,8 @@ public class Match3_GameController : MonoBehaviour
     // Handles a group of objects that were involved in a match chain.
     private void HandleMatches(List<Transform> matches)
     {
+        if(!doingInitialRuns) PlaySound(matchSound);
+
         foreach (Transform obj in matches)
         {
             int[] coords = FindBlockCoordsInArray(obj);
@@ -330,9 +349,21 @@ public class Match3_GameController : MonoBehaviour
         {
             PrintDebugMsg("Round over!");
             endedRound = true;
+            PlaySound(endRoundSound);
 
             Resources.SINGLETON.EndRound();
         }
+    }
+
+    // Assign the chosen AudioClip and play the sound.
+    private void PlaySound(AudioClip clip)
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if (clip == endRoundSound) audioSource.volume = .2f;
+        else audioSource.volume = 1;
+        audioSource.clip = clip;
+        audioSource.Play();
     }
     #endregion
 
@@ -411,6 +442,13 @@ public class Match3_GameController : MonoBehaviour
     // Update is called every frame, if the MonoBehaviour is enabled.
     void Update()
     {
+        if(Time.time - lastButton >= soundDelay)
+        {
+            if (menuLoad == "Restart") SceneManager.LoadScene(1);
+            else if (menuLoad == "City") SceneManager.LoadScene("City_Final");
+            else if (menuLoad == "MainMenu") SceneManager.LoadScene(0);
+        }
+
         UpdateBoard();
         if (!AreObjsMoving()) UpdateObjsPos();
         if (!isPlaying && !endedRound) EndRound();
