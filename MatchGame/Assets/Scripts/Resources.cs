@@ -45,6 +45,8 @@ public class Resources : MonoBehaviour
     #endregion
 
     #region Private
+    private string currPlayerName = "";
+
     private int maxMoves = 0;
     private int currMoves = 0;
 
@@ -125,28 +127,28 @@ public class Resources : MonoBehaviour
                 preWoodTotal = woodTotal;
                 woodTotal += amount;
                 if (woodTotal < 0) woodTotal = 0;
-                PlayerPrefs.SetInt("woodTotal", woodTotal);
+                PlayerPrefs.SetInt(currPlayerName + "_woodTotal", woodTotal);
                 PrintDebugMsg("New total wood: " + woodCurr);
                 break;
             case BlockTypes.Gold:
                 preGoldTotal = goldTotal;
                 goldTotal += amount;
                 if (goldTotal < 0) goldTotal = 0;
-                PlayerPrefs.SetInt("goldTotal", goldTotal);
+                PlayerPrefs.SetInt(currPlayerName + "_goldTotal", goldTotal);
                 PrintDebugMsg("New total gold: " + goldCurr);
                 break;
             case BlockTypes.Stone:
                 preStoneTotal = stoneTotal;
                 stoneTotal += amount;
                 if (stoneTotal < 0) stoneTotal = 0;
-                PlayerPrefs.SetInt("stoneTotal", stoneTotal);
+                PlayerPrefs.SetInt(currPlayerName + "_stoneTotal", stoneTotal);
                 PrintDebugMsg("New total stone: " + stoneCurr);
                 break;
             case BlockTypes.Food:
                 preFoodTotal = foodTotal;
                 foodTotal += amount;
                 if (foodTotal < 0) foodTotal = 0;
-                PlayerPrefs.SetInt("foodTotal", foodTotal);
+                PlayerPrefs.SetInt(currPlayerName + "_foodTotal", foodTotal);
                 PrintDebugMsg("New total food: " + foodCurr);
                 break;
         }
@@ -188,18 +190,18 @@ public class Resources : MonoBehaviour
     // Loads the resource totals from PlayerPrefs
     private void LoadSavedTotals()
     {
-        woodTotal = PlayerPrefs.GetInt("woodTotal");
-        goldTotal = PlayerPrefs.GetInt("goldTotal");
-        stoneTotal = PlayerPrefs.GetInt("stoneTotal");
-        foodTotal = PlayerPrefs.GetInt("foodTotal");
+        woodTotal = PlayerPrefs.GetInt(currPlayerName + "_woodTotal");
+        goldTotal = PlayerPrefs.GetInt(currPlayerName + "_goldTotal");
+        stoneTotal = PlayerPrefs.GetInt(currPlayerName + "_stoneTotal");
+        foodTotal = PlayerPrefs.GetInt(currPlayerName + "_foodTotal");
     }
     // Deletes all the total resources
     private void DeleteSavedTotals()
     {
-        PlayerPrefs.DeleteKey("woodTotal");
-        PlayerPrefs.DeleteKey("goldTotal");
-        PlayerPrefs.DeleteKey("stoneTotal");
-        PlayerPrefs.DeleteKey("foodTotal");
+        PlayerPrefs.DeleteKey(currPlayerName + "_woodTotal");
+        PlayerPrefs.DeleteKey(currPlayerName + "_goldTotal");
+        PlayerPrefs.DeleteKey(currPlayerName + "_stoneTotal");
+        PlayerPrefs.DeleteKey(currPlayerName + "_foodTotal");
     }
 
     // Reads the saved upgrades from the city and applies each one that is enabled.
@@ -211,62 +213,102 @@ public class Resources : MonoBehaviour
         goldBonus = 0;
         maxMoves = 0;
 
-        if(PlayerPrefs.GetInt("HouseCount") > 0)
+        if(PlayerPrefs.GetInt(currPlayerName + "_HouseCount") > 0)
         {
-            foodBonus += PlayerPrefs.GetInt("HouseCount");
-            woodBonus += PlayerPrefs.GetInt("HouseCount");
-            stoneBonus += PlayerPrefs.GetInt("HouseCount");
-            goldBonus += PlayerPrefs.GetInt("HouseCount");
-            maxMoves += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("HouseCount: " + PlayerPrefs.GetInt(currPlayerName + "_HouseCount"));
+            foodBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
+            woodBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
+            stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
+            goldBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
+            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
         }
-        if (PlayerPrefs.GetInt("MineCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_MineCount") > 0)
         {
-            stoneBonus += PlayerPrefs.GetInt("HouseCount");
-            goldBonus += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("MineCount: " + PlayerPrefs.GetInt(currPlayerName + "_MineCount"));
+            stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_MineCount");
+            goldBonus += PlayerPrefs.GetInt(currPlayerName + "_MineCount");
         }
-        if (PlayerPrefs.GetInt("QuarryCount") > 0) stoneBonus += PlayerPrefs.GetInt("HouseCount");
-        if (PlayerPrefs.GetInt("LumberCampCount") > 0) woodBonus += PlayerPrefs.GetInt("HouseCount");
-        if (PlayerPrefs.GetInt("FarmCount") > 0) foodBonus += PlayerPrefs.GetInt("HouseCount");
-        if (PlayerPrefs.GetInt("WarehouseCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_QuarryCount") > 0)
         {
-            foodBonus += PlayerPrefs.GetInt("HouseCount");
-            woodBonus += PlayerPrefs.GetInt("HouseCount");
-            stoneBonus += PlayerPrefs.GetInt("HouseCount");
-            goldBonus += PlayerPrefs.GetInt("HouseCount");
-            maxMoves += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("QuarryCount: " + PlayerPrefs.GetInt(currPlayerName + "_QuarryCount"));
+            stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_QuarryCount");
         }
-        if (PlayerPrefs.GetInt("BakeryCount") > 0) foodBonus += PlayerPrefs.GetInt("HouseCount");
-        if (PlayerPrefs.GetInt("WallsCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_LumberCampCount") > 0)
         {
-            stoneBonus += PlayerPrefs.GetInt("HouseCount");
-            goldBonus += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("LumberCampCount: " + PlayerPrefs.GetInt(currPlayerName + "_LumberCampCount"));
+            woodBonus += PlayerPrefs.GetInt(currPlayerName + "_LumberCampCount");
         }
-        if (PlayerPrefs.GetInt("ArmorsmithCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_FarmCount") > 0)
         {
-            woodBonus += PlayerPrefs.GetInt("HouseCount");
-            goldBonus += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("FarmCount: " + PlayerPrefs.GetInt(currPlayerName + "_FarmCount"));
+            foodBonus += PlayerPrefs.GetInt(currPlayerName + "_FarmCount");
         }
-        if (PlayerPrefs.GetInt("WeaponsmithCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount") > 0)
         {
-            stoneBonus += PlayerPrefs.GetInt("HouseCount");
-            goldBonus += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("WarehouseCount: " + PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount"));
+            foodBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
+            woodBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
+            stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
+            goldBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
+            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
         }
-        if (PlayerPrefs.GetInt("BarricksCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_BakeryCount") > 0)
         {
-            woodBonus += PlayerPrefs.GetInt("HouseCount");
-            maxMoves += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("BakeryCount: " + PlayerPrefs.GetInt(currPlayerName + "_BakeryCount"));
+            foodBonus += PlayerPrefs.GetInt(currPlayerName + "_BakeryCount");
         }
-        if (PlayerPrefs.GetInt("MainGateCount") > 0) woodBonus += PlayerPrefs.GetInt("HouseCount");
-        if (PlayerPrefs.GetInt("MarketCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_WallsCount") > 0)
         {
-            woodBonus += PlayerPrefs.GetInt("HouseCount");
-            stoneBonus += PlayerPrefs.GetInt("HouseCount");
-            goldBonus += PlayerPrefs.GetInt("HouseCount");
-            maxMoves += PlayerPrefs.GetInt("HouseCount");
+            PrintDebugMsg("WallsCount: " + PlayerPrefs.GetInt(currPlayerName + "_WallsCount"));
+            stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_WallsCount");
+            goldBonus += PlayerPrefs.GetInt(currPlayerName + "_WallsCount");
         }
-        if (PlayerPrefs.GetInt("DairyCount") > 0) foodBonus += PlayerPrefs.GetInt("HouseCount");
-        if (PlayerPrefs.GetInt("WindmillCount") > 0) foodBonus += PlayerPrefs.GetInt("HouseCount");
-        if (PlayerPrefs.GetInt("SlaughterhouseCount") > 0) foodBonus += PlayerPrefs.GetInt("HouseCount");
+        if (PlayerPrefs.GetInt(currPlayerName + "_ArmorsmithCount") > 0)
+        {
+            PrintDebugMsg("ArmorsmithCount: " + PlayerPrefs.GetInt(currPlayerName + "_ArmorsmithCount"));
+            woodBonus += PlayerPrefs.GetInt(currPlayerName + "_ArmorsmithCount");
+            goldBonus += PlayerPrefs.GetInt(currPlayerName + "_ArmorsmithCount");
+        }
+        if (PlayerPrefs.GetInt(currPlayerName + "_WeaponsmithCount") > 0)
+        {
+            PrintDebugMsg("WeaponsmithCount: " + PlayerPrefs.GetInt(currPlayerName + "_WeaponsmithCount"));
+            stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_WeaponsmithCount");
+            goldBonus += PlayerPrefs.GetInt(currPlayerName + "_WeaponsmithCount");
+        }
+        if (PlayerPrefs.GetInt(currPlayerName + "B_arracksCount") > 0)
+        {
+            PrintDebugMsg("BarracksCount: " + PlayerPrefs.GetInt(currPlayerName + "_BarracksCount"));
+            woodBonus += PlayerPrefs.GetInt(currPlayerName + "_BarracksCount");
+            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_BarracksCount");
+        }
+        if (PlayerPrefs.GetInt(currPlayerName + "_MainGateCount") > 0)
+        {
+            PrintDebugMsg("MainGateCount: " + PlayerPrefs.GetInt(currPlayerName + "_MainGateCount"));
+            woodBonus += PlayerPrefs.GetInt(currPlayerName + "_MainGateCount");
+        }
+        if (PlayerPrefs.GetInt(currPlayerName + "_MarketCount") > 0)
+        {
+            PrintDebugMsg("MarketCount: " + PlayerPrefs.GetInt(currPlayerName + "_MarketCount"));
+            woodBonus += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
+            stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
+            goldBonus += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
+            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
+        }
+        if (PlayerPrefs.GetInt(currPlayerName + "_DairyCount") > 0)
+        {
+            PrintDebugMsg("DairyCount: " + PlayerPrefs.GetInt(currPlayerName + "_DairyCount"));
+            foodBonus += PlayerPrefs.GetInt(currPlayerName + "_DairyCount");
+        }
+        if (PlayerPrefs.GetInt(currPlayerName + "_WindmillCount") > 0)
+        {
+            PrintDebugMsg("WindmillCount: " + PlayerPrefs.GetInt(currPlayerName + "_WindmillCount"));
+            foodBonus += PlayerPrefs.GetInt(currPlayerName + "_WindmillCount");
+        }
+        if (PlayerPrefs.GetInt(currPlayerName + "_SlaughterhouseCount") > 0)
+        {
+            PrintDebugMsg("SlaughterhouseCount: " + PlayerPrefs.GetInt(currPlayerName + "_SlaughterhouseCount"));
+            foodBonus += PlayerPrefs.GetInt(currPlayerName + "_SlaughterhouseCount");
+        }
 
         PrintDebugMsg("Bonuses (Food/Wood/Stone/Gold/Moves): " + foodBonus + "/" + woodBonus + "/" + stoneBonus + "/" + goldBonus + "/" + maxMoves);
     }
@@ -307,6 +349,8 @@ public class Resources : MonoBehaviour
 
         if (Resources.SINGLETON == null) SINGLETON = this;
         else PrintErrorDebugMsg("More than one Resources.SINGLETONs detected!");
+
+        currPlayerName = Game.current.PlayerOne.name;
     }
     // Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
     void Start()

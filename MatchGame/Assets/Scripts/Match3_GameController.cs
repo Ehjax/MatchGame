@@ -23,7 +23,7 @@ public class Match3_GameController : MonoBehaviour
     public int rows = 10;
     public int columns = 5;
     public float blockSpeed = 5;
-
+    
     public AudioClip slidingSound = null;
     public AudioClip matchSound = null;
     public AudioClip endRoundSound = null;
