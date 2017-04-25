@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour {
 
 	void OnGUI () {
 
-		GUILayout.BeginArea(new Rect(0,0,Screen.width, Screen.height));
+		GUILayout.BeginArea(new Rect(0,200,Screen.width, Screen.height));
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
 		GUILayout.BeginVertical();
@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour {
 
 		if(currentMenu == Menu.MainMenu) {
 
-			GUILayout.Box("Anti - Nomad");
+			//GUILayout.Box("Anti - Nomad");
 			GUILayout.Space(10);
 
 			if(GUILayout.Button("New Game")) {
