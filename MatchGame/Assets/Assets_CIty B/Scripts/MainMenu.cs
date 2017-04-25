@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour {
 
 		if(currentMenu == Menu.MainMenu) {
 
-			GUILayout.Box("MATCH THREE CITY BUILDER");
+			GUILayout.Box("Anti - Nomad");
 			GUILayout.Space(10);
 
 			if(GUILayout.Button("New Game")) {

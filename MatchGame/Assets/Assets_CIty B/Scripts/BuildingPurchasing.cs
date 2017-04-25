@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class BuildingPurchasing : MonoBehaviour {
 	public List<Building> buildings;
+//	public int [] Tiers = new int[4]; 
 	public static BuildingPurchasing SINGLETON; 
 	void Awake() 
 	{
@@ -86,6 +87,8 @@ public bool purchase (string name)
 
 		return null;
 	}
+
+
 }
 
 	

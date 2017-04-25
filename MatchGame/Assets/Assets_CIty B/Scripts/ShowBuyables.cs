@@ -18,6 +18,8 @@ public class ShowBuyables : MonoBehaviour {
 	public Button Buy_Slaughterhouse;
 	public Button Buy_Quarry;
 	public Button Buy_Mine;
+	public Button Buy_Bakery;
+	public Button Buy_Farm;
 
 
 
@@ -38,6 +40,11 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Slaughterhouse.gameObject.SetActive(false);
 		Buy_Quarry.gameObject.SetActive(false);
 		Buy_Mine.gameObject.SetActive(false);
+		Buy_Mine.gameObject.SetActive(false);
+		Buy_Farm.gameObject.SetActive(false);
+		Buy_Bakery.gameObject.SetActive(false);
+
+
 
 
 
@@ -67,6 +74,9 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Slaughterhouse.gameObject.SetActive(true);
 		Buy_Quarry.gameObject.SetActive(true);
 		Buy_Mine.gameObject.SetActive(true);
+		Buy_Farm.gameObject.SetActive(true);
+		Buy_Bakery.gameObject.SetActive(true);
+
 
 
 
