@@ -10,7 +10,7 @@ public class ShowBuyables : MonoBehaviour {
 	public Button Buy_Market;
 	public Button Buy_Windmill;
 	public Button Buy_mainGate;
-	public Button Buy_Ironworks;
+	public Button Buy_Weaponsmith;
 	public Button Buy_Barracks;
 	public Button Buy_Dairy;
 	public Button Buy_Wall;
@@ -32,7 +32,7 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Market.gameObject.SetActive(false);
 		Buy_Windmill.gameObject.SetActive(false);
 		Buy_mainGate.gameObject.SetActive(false);
-		Buy_Ironworks.gameObject.SetActive(false);
+		Buy_Weaponsmith.gameObject.SetActive(false);
 		Buy_Barracks.gameObject.SetActive(false);
 		Buy_Dairy.gameObject.SetActive(false);
 		Buy_Wall.gameObject.SetActive(false);
@@ -66,7 +66,7 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Market.gameObject.SetActive(true);
 		Buy_Windmill.gameObject.SetActive(true);
 		Buy_mainGate.gameObject.SetActive(true);
-		Buy_Ironworks.gameObject.SetActive(true);
+		Buy_Weaponsmith.gameObject.SetActive(true);
 		Buy_Barracks.gameObject.SetActive(true);
 		Buy_Dairy.gameObject.SetActive(true);
 		Buy_Wall.gameObject.SetActive(true);

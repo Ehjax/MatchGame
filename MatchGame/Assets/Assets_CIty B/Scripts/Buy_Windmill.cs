@@ -17,6 +17,7 @@ public class Buy_Windmill : MonoBehaviour {
 
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Windmill")) 
 		{
+			PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_WindmillCount", PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_WindmillCount") + 1);
 			Instantiate (windmillPrefab, new Vector3 (223, 2, 206), Quaternion.identity);
 			//Purchase.gameObject.SetActive(false);
 			GetComponent<Image> ().color = Color.red;

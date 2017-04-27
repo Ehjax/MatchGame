@@ -15,7 +15,19 @@ public class Buy_Bakery : MonoBehaviour {
 
 	public void TaskOnClick(){
 		Debug.Log ("You bought a Bakery!");
-		Instantiate(bakeryPrefab, new Vector3(274, 2, 230), Quaternion.identity);
+		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Bakery")) 
+		{
+			PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_BakeryCount", PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_BakeryCount") + 1);
+			Instantiate(bakeryPrefab, new Vector3(274, 2, 230), Quaternion.identity);
+			//Purchase.gameObject.SetActive(false);
+			GetComponent<Image> ().color = Color.red;
+			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Bakery");
+		} 
+		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
+		{
+			Debug.Log ("You don't have enough for that");
+		}
+
 		//Purchase.gameObject.SetActive(false);
 		GetComponent<Image> ().color = Color.red;
 	}

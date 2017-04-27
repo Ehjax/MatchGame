@@ -15,8 +15,20 @@ public class Buy_Dairy : MonoBehaviour {
 	}
 
 	public void TaskOnClick(){
-		Debug.Log ("You bought a Barracks!");
-		Instantiate(DairyPrefab, new Vector3(140, 5, 284), Quaternion.identity);
+		Debug.Log ("You bought a Dairy Farm!");
+		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Dairy")) 
+		{
+			PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_DairyCount", PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_DairyCount") + 1);
+			Instantiate(DairyPrefab, new Vector3(140, 5, 284), Quaternion.identity);
+			//Purchase.gameObject.SetActive(false);
+			GetComponent<Image> ().color = Color.red;
+			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Dairy");
+		} 
+		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
+		{
+			Debug.Log ("You don't have enough for that");
+		}
+
 		//Purchase.gameObject.SetActive(false);
 		GetComponent<Image> ().color = Color.red;
 	}
