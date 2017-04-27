@@ -275,7 +275,7 @@ public class Resources : MonoBehaviour
             stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_WeaponsmithCount");
             goldBonus += PlayerPrefs.GetInt(currPlayerName + "_WeaponsmithCount");
         }
-        if (PlayerPrefs.GetInt(currPlayerName + "B_arracksCount") > 0)
+        if (PlayerPrefs.GetInt(currPlayerName + "_BarracksCount") > 0)
         {
             PrintDebugMsg("BarracksCount: " + PlayerPrefs.GetInt(currPlayerName + "_BarracksCount"));
             woodBonus += PlayerPrefs.GetInt(currPlayerName + "_BarracksCount");

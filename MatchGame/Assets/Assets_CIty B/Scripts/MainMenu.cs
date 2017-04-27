@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour {
 
 	public enum Menu {
-		MainMenu,
+        Title,
+        MainMenu,
 		NewGame,
 		Continue
 	}
@@ -89,4 +91,66 @@ public class MainMenu : MonoBehaviour {
 		GUILayout.EndArea();
 
 	}
+
+    public GameObject titleScreen = null;
+    public GameObject mainMenuScreen = null;
+    public GameObject newGameScreen = null;
+    public InputField nameField = null;
+    public GameObject continueScreen = null;
+
+    public void StartGame()
+    {
+        currentMenu = Menu.MainMenu;
+    }
+    public void NewGame()
+    {
+        currentMenu = Menu.NewGame;
+        Game.current = new Game();
+    }
+    public void SaveName()
+    {
+        Game.current.PlayerOne.name = nameField.text;
+        Debug.Log(Game.current.PlayerOne.name);
+        SaveLoad.Save();
+        SceneManager.LoadScene("match3");
+    }
+    public void Continue()
+    {
+        currentMenu = Menu.Continue;
+    }
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void Update()
+    {
+        switch (currentMenu)
+        {
+            case Menu.Title:
+                titleScreen.SetActive(true);
+                mainMenuScreen.SetActive(false);
+                newGameScreen.SetActive(false);
+                continueScreen.SetActive(false);
+                break;
+            case Menu.MainMenu:
+                titleScreen.SetActive(false);
+                mainMenuScreen.SetActive(true);
+                newGameScreen.SetActive(false);
+                continueScreen.SetActive(false);
+                break;
+            case Menu.NewGame:
+                titleScreen.SetActive(false);
+                mainMenuScreen.SetActive(false);
+                newGameScreen.SetActive(true);
+                continueScreen.SetActive(false);
+                break;
+            case Menu.Continue:
+                titleScreen.SetActive(false);
+                mainMenuScreen.SetActive(false);
+                newGameScreen.SetActive(false);
+                continueScreen.SetActive(true);
+                break;
+        }
+    }
 }
