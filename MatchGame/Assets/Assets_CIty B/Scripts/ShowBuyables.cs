@@ -7,6 +7,8 @@ public class ShowBuyables : MonoBehaviour {
 	//Create the Button Variables
 	public Button Buy_Items;
 	public Button Buy_House;
+	public Button Buy_House2;
+	public Button Buy_House3;
 	public Button Buy_Market;
 	public Button Buy_Windmill;
 	public Button Buy_mainGate;
@@ -20,6 +22,7 @@ public class ShowBuyables : MonoBehaviour {
 	public Button Buy_Mine;
 	public Button Buy_Bakery;
 	public Button Buy_Farm;
+	public Button Buy_Armorsmith;
 
 
 
@@ -29,6 +32,8 @@ public class ShowBuyables : MonoBehaviour {
 	// at runtime hide all 'buy' buttons and add event listener to Buy_Items button
 	void Start () {
 		Buy_House.gameObject.SetActive(false);
+		Buy_House2.gameObject.SetActive(false);
+		Buy_House3.gameObject.SetActive(false);
 		Buy_Market.gameObject.SetActive(false);
 		Buy_Windmill.gameObject.SetActive(false);
 		Buy_mainGate.gameObject.SetActive(false);
@@ -43,6 +48,7 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Mine.gameObject.SetActive(false);
 		Buy_Farm.gameObject.SetActive(false);
 		Buy_Bakery.gameObject.SetActive(false);
+		Buy_Armorsmith.gameObject.SetActive(false);
 
 
 
@@ -63,6 +69,8 @@ public class ShowBuyables : MonoBehaviour {
 	public void TaskOnClick(){
 		Debug.Log ("You Want To Buy Stuff!");
 		Buy_House.gameObject.SetActive(true);
+		Buy_House2.gameObject.SetActive(true);
+		Buy_House3.gameObject.SetActive(true);
 		Buy_Market.gameObject.SetActive(true);
 		Buy_Windmill.gameObject.SetActive(true);
 		Buy_mainGate.gameObject.SetActive(true);
@@ -76,6 +84,8 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Mine.gameObject.SetActive(true);
 		Buy_Farm.gameObject.SetActive(true);
 		Buy_Bakery.gameObject.SetActive(true);
+		Buy_Armorsmith.gameObject.SetActive(true);
+
 
 
 
