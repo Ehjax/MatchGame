@@ -351,6 +351,7 @@ public class Resources : MonoBehaviour
         else PrintErrorDebugMsg("More than one Resources.SINGLETONs detected!");
 
         currPlayerName = Game.current.PlayerOne.name;
+        PrintDebugMsg("Player's name: " + currPlayerName);
     }
     // Start is called on the frame when a script is enabled just before any of the Update methods is called the first time.
     void Start()

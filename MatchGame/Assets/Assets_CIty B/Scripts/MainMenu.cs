@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class MainMenu : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class MainMenu : MonoBehaviour {
 
 	public Menu currentMenu;
 
+    /*
 	void OnGUI () {
 
 		GUILayout.BeginArea(new Rect(0,200,Screen.width, Screen.height));
@@ -90,16 +92,25 @@ public class MainMenu : MonoBehaviour {
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 
-	}
+	}*/
 
     public GameObject titleScreen = null;
     public GameObject mainMenuScreen = null;
     public GameObject newGameScreen = null;
     public InputField nameField = null;
     public GameObject continueScreen = null;
+    public GameObject saveGameButtonPrefab = null;
+
+    private List<GameObject> spawnedButtons = new List<GameObject>();
 
     public void StartGame()
     {
+        nameField.text = "";
+        if(spawnedButtons.Count > 0)
+        {
+            foreach (GameObject button in spawnedButtons) Destroy(button);
+        }
+
         currentMenu = Menu.MainMenu;
     }
     public void NewGame()
@@ -110,13 +121,21 @@ public class MainMenu : MonoBehaviour {
     public void SaveName()
     {
         Game.current.PlayerOne.name = nameField.text;
-        Debug.Log(Game.current.PlayerOne.name);
         SaveLoad.Save();
+
         SceneManager.LoadScene("match3");
     }
     public void Continue()
     {
         currentMenu = Menu.Continue;
+        
+        foreach(Game game in SaveLoad.savedGames)
+        {
+            GameObject button = Instantiate(saveGameButtonPrefab);
+            button.GetComponent<LoadGameButton>().SavedGame = game;
+
+            spawnedButtons.Add(button);
+        }
     }
     public void Quit()
     {
@@ -152,5 +171,9 @@ public class MainMenu : MonoBehaviour {
                 continueScreen.SetActive(true);
                 break;
         }
+    }
+    public void Start()
+    {
+        Game.current = new Game();
     }
 }
