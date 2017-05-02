@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour {
 
 	public Menu currentMenu;
 
-    /*
+    /* Dean's OnGUI() code
 	void OnGUI () {
 
 		GUILayout.BeginArea(new Rect(0,200,Screen.width, Screen.height));
@@ -100,6 +100,7 @@ public class MainMenu : MonoBehaviour {
     public InputField nameField = null;
     public GameObject continueScreen = null;
     public GameObject saveGameButtonPrefab = null;
+    public GameObject deleteGameButtonPrefab = null;
 
     private List<GameObject> spawnedButtons = new List<GameObject>();
 
@@ -133,13 +134,21 @@ public class MainMenu : MonoBehaviour {
         {
             GameObject button = Instantiate(saveGameButtonPrefab);
             button.GetComponent<LoadGameButton>().SavedGame = game;
+            spawnedButtons.Add(button);
 
+            button = Instantiate(deleteGameButtonPrefab);
+            button.GetComponent<DeleteGameButton>().SavedGame = game;
             spawnedButtons.Add(button);
         }
     }
     public void Quit()
     {
         Application.Quit();
+    }
+    public void ReloadContinue()
+    {
+        StartGame();
+        Continue();
     }
 
     public void Update()
