@@ -9,8 +9,8 @@ public static class SaveLoad {
 	public static List<Game> savedGames = new List<Game>();
 			
 	//it's static so we can call it from anywhere
-	public static void Save() {
-		SaveLoad.savedGames.Add(Game.current);
+	public static void Save(bool deleting = false) {
+		if(!deleting) SaveLoad.savedGames.Add(Game.current);
 		BinaryFormatter bf = new BinaryFormatter();
 		//Application.persistentDataPath is a string, so if you wanted you can put that into debug.log if you want to know where save games are located
 		FileStream file = File.Create (Application.persistentDataPath + "/savedGames.gd"); //you can call it anything you want
@@ -26,4 +26,21 @@ public static class SaveLoad {
 			file.Close();
 		}
 	}
+
+    public static void Delete(Game game)
+    {
+        if(SaveLoad.savedGames.Count > 0)
+        {
+            if (SaveLoad.savedGames.Contains(game))
+            {
+                Debug.Log("Saves before delete: " + SaveLoad.savedGames.Count);
+                SaveLoad.savedGames.Remove(game);
+                Debug.Log("Saves after delete: " + SaveLoad.savedGames.Count);
+                Save(true);
+                Debug.Log("Saves after save: " + SaveLoad.savedGames.Count);
+                Load();
+                Debug.Log("Saves after load: " + SaveLoad.savedGames.Count);
+            }
+        }
+    }
 }
