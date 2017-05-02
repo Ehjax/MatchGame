@@ -7,11 +7,15 @@ using UnityEngine;
 public class Buy_Wall : MonoBehaviour {
 	public GameObject WallPrefab;
 	public Button Purchase;
+	public GameObject alertText;
+
 
 	void Start () {
 		gameObject.GetComponent<ParticleSystem> ();
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
+		alertText.SetActive (false);
+
 	}
 
 	public void TaskOnClick(){
@@ -26,6 +30,8 @@ public class Buy_Wall : MonoBehaviour {
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
+			alertText.SetActive (false);
+
 			Debug.Log ("You don't have enough for that");
 		}
 

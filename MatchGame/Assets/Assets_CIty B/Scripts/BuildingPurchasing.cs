@@ -8,6 +8,10 @@ public class BuildingPurchasing : MonoBehaviour {
 	public List<Building> buildings;
 //	public int [] Tiers = new int[4]; 
 	public static BuildingPurchasing SINGLETON; 
+	private int currentTier = 0;
+	public int currentBuilt = 0;
+	private int[] buildsRequired = {5,5,5,5,1};
+
 	void Awake() 
 	{
 		if (BuildingPurchasing.SINGLETON == null)
@@ -87,7 +91,15 @@ public bool purchase (string name)
 
 		return null;
 	}
-
+	public void checkTier () 
+	{
+		foreach (Building building in buildings)
+		{
+			if (currentBuilt >= buildsRequired [currentTier])
+				currentTier++;
+				currentBuilt = 0;
+			}
+}
 
 }
 
