@@ -11,9 +11,15 @@ public class BuildingPurchasing : MonoBehaviour {
 	private int currentTier = 0;
 	public int currentBuilt = 0;
 	private int[] buildsRequired = {5,5,5,5,1};
+	public float alertTextTimeout = 10F;
+	private float alertTextTimeRemaining; 
+	public bool alertTextActive = false;
+	public bool clicked = false;
+
 
 	void Awake() 
 	{
+		alertTextTimeRemaining = alertTextTimeout;
 		if (BuildingPurchasing.SINGLETON == null)
 			SINGLETON = this;
 		else Debug.LogError("Building Purchasing SINGLETON Already exists");
@@ -99,7 +105,16 @@ public bool purchase (string name)
 				currentTier++;
 				currentBuilt = 0;
 			}
-}
+	}
+	private void Update()
+	{
+		if (alertTextActive && alertTextTimeRemaining > 0) 
+		{
+			// reduce the remaining time by time passed since last update frame
+			alertTextTimeRemaining -= Time.deltaTime;
+			alertTextActive = false;
+		}
+	}
 
 }
 

@@ -23,8 +23,8 @@ public class MoveCamera : MonoBehaviour {
 	void Start () {
 		if (MoveCamera.SINGLETON == null)
 			SINGLETON = this;
-		Button btn = Purchase.GetComponent<Button>();
-		btn.onClick.AddListener(TaskOnClick);
+		//Button btn = Purchase.GetComponent<Button>();
+		//btn.onClick.AddListener(TaskOnClick);
 	}
 		//
 		// UPDATE

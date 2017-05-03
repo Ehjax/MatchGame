@@ -25,6 +25,10 @@ public class Buy_mainGate: MonoBehaviour {
 			//Purchase.gameObject.SetActive(false);
 			GetComponent<Image> ().color = Color.red;
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("mainGate");
+			BuildingPurchasing.SINGLETON.currentBuilt++;
+			BuildingPurchasing.SINGLETON.checkTier ();
+			Camera.main.transform.position = new Vector3 (174, 10, 249);
+
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{

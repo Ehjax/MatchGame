@@ -25,6 +25,11 @@ public class Buy_Quarry : MonoBehaviour {
 			//Purchase.gameObject.SetActive(false);
 			GetComponent<Image> ().color = Color.red;
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Quarry");
+			BuildingPurchasing.SINGLETON.currentBuilt++;
+			BuildingPurchasing.SINGLETON.checkTier ();
+			Camera.main.transform.position = new Vector3 (241, 3, 267);
+
+
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{

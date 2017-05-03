@@ -26,6 +26,10 @@ public class Buy_Windmill : MonoBehaviour {
 			//Purchase.gameObject.SetActive(false);
 			GetComponent<Image> ().color = Color.red;
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Windmill");
+			BuildingPurchasing.SINGLETON.currentBuilt++;
+			BuildingPurchasing.SINGLETON.checkTier ();
+			Camera.main.transform.position = new Vector3 (223, 2, 186);
+
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{

@@ -26,6 +26,11 @@ public class Buy_Slaughterhouse : MonoBehaviour {
 			//Purchase.gameObject.SetActive(false);
 			GetComponent<Image> ().color = Color.red;
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Slaughterhouse");
+			BuildingPurchasing.SINGLETON.currentBuilt++;
+			BuildingPurchasing.SINGLETON.checkTier ();
+			Camera.main.transform.position = new Vector3 (272, 5, 244);
+
+
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{

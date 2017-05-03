@@ -4,14 +4,13 @@ using UnityEngine.UI;
 using UnityEngine;
 
 
-public class Buy_Wall : MonoBehaviour {
-	public GameObject WallPrefab;
+public class Buy_Warehouse : MonoBehaviour {
+	public GameObject warehousePrefab;
 	public Button Purchase;
 	public GameObject alertText;
 
 
 	void Start () {
-		gameObject.GetComponent<ParticleSystem> ();
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
@@ -19,17 +18,18 @@ public class Buy_Wall : MonoBehaviour {
 	}
 
 	public void TaskOnClick(){
-		Debug.Log ("You bought a City Wall!");
-		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Wall")) 
+		Debug.Log ("You bought a Slaughterhouse!");
+		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Slaughterhouse")) 
 		{
-			PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_WallsCount", PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_WallsCount") + 1);
-			Instantiate(WallPrefab, new Vector3(229, 1, 204), Quaternion.identity);
+			PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_WarehouseCount", PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_WarehouseCount") + 1);
+			Instantiate(warehousePrefab, new Vector3(188, 9, 211), Quaternion.identity);
 			//Purchase.gameObject.SetActive(false);
 			GetComponent<Image> ().color = Color.red;
-			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Wall");
+			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Warehouse");
 			BuildingPurchasing.SINGLETON.currentBuilt++;
 			BuildingPurchasing.SINGLETON.checkTier ();
-			Camera.main.transform.position = new Vector3 (229, 1, 184);
+			Camera.main.transform.position = new Vector3 (188, 9, 191);
+
 
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))

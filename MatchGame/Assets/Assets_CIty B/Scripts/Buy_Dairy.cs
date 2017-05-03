@@ -24,18 +24,19 @@ public class Buy_Dairy : MonoBehaviour {
 			PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_DairyCount", PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_DairyCount") + 1);
 			Instantiate(DairyPrefab, new Vector3(140, 5, 284), Quaternion.identity);
 			//Purchase.gameObject.SetActive(false);
-			GetComponent<Image> ().color = Color.red;
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Dairy");
 			BuildingPurchasing.SINGLETON.currentBuilt++;
 			BuildingPurchasing.SINGLETON.checkTier ();
+			Camera.main.transform.position = new Vector3 (140, 5, 264);
+
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
+			GetComponent<Image> ().color = Color.red;
 			alertText.SetActive (true);
 			Debug.Log ("You don't have enough for that");
 		}
 
 		//Purchase.gameObject.SetActive(false);
-		GetComponent<Image> ().color = Color.red;
 	}
 }

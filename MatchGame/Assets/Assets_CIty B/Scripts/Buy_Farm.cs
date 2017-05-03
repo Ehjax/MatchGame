@@ -21,18 +21,21 @@ public class Buy_Farm : MonoBehaviour {
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Farm")) 
 		{
 			PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_FarmCount", PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_FarmCount") + 1);
-			Instantiate(farmPrefab, new Vector3(240, 2, 230), Quaternion.identity);
+			Instantiate(farmPrefab, new Vector3(240, 5, 230), Quaternion.identity);
 			//Purchase.gameObject.SetActive(false);
-			GetComponent<Image> ().color = Color.red;
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Farm");
+			BuildingPurchasing.SINGLETON.currentBuilt++;
+			BuildingPurchasing.SINGLETON.checkTier ();
+			Camera.main.transform.position = new Vector3 (240, 5, 210);
+
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
 			alertText.SetActive (true);
 			Debug.Log ("You don't have enough for that");
+			GetComponent<Image> ().color = Color.red;
 		}
 
 		//Purchase.gameObject.SetActive(false);
-		GetComponent<Image> ().color = Color.red;
 	}
 }
