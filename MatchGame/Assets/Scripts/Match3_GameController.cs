@@ -30,6 +30,8 @@ public class Match3_GameController : MonoBehaviour
     public AudioClip buttonSound = null;
     public float soundDelay = .25f;
     public GameObject[] spawnableBlocks;
+
+    public GameObject pauseMenu = null;
     #endregion
 
     #region Private
@@ -41,6 +43,7 @@ public class Match3_GameController : MonoBehaviour
 
     private bool isPlaying = true;
     private bool endedRound = false;
+    private bool isPaused = false;
 
     private string menuLoad = "";
 
@@ -154,6 +157,20 @@ public class Match3_GameController : MonoBehaviour
         PlaySound(buttonSound);
         menuLoad = "MainMenu";
         lastButton = Time.time;
+    }
+
+    // Pauses/resumes and shows/hides a menu with resume and main menu buttons.
+    public void PauseGame()
+    {
+        isPlaying = false;
+        isPaused = true;
+        pauseMenu.SetActive(true);
+    }
+    public void ResumeGame()
+    {
+        isPlaying = true;
+        isPaused = false;
+        pauseMenu.SetActive(false);
     }
     #endregion
 
@@ -451,7 +468,7 @@ public class Match3_GameController : MonoBehaviour
 
         UpdateBoard();
         if (!AreObjsMoving()) UpdateObjsPos();
-        if (!isPlaying && !endedRound) EndRound();
+        if (!isPlaying && !endedRound && !isPaused) EndRound();
 
         if (isDebug)
         {

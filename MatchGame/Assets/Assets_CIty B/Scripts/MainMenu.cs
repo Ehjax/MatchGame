@@ -94,6 +94,7 @@ public class MainMenu : MonoBehaviour {
 
 	}*/
 
+    public bool eraseAllPlayerPrefs = false;
     public GameObject titleScreen = null;
     public GameObject mainMenuScreen = null;
     public GameObject newGameScreen = null;
@@ -183,6 +184,8 @@ public class MainMenu : MonoBehaviour {
     }
     public void Start()
     {
+        if (eraseAllPlayerPrefs) PlayerPrefs.DeleteAll();
+
         Game.current = new Game();
     }
 }

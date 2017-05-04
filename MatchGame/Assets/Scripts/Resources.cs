@@ -372,7 +372,7 @@ public class Resources : MonoBehaviour
     // Update is called every frame, if the MonoBehaviour is enabled.
     void Update()
     {
-
+        UpdateUI();
     }
     // LateUpdate is called every frame after all other update functions, if the Behaviour is enabled.
     void LateUpdate()
