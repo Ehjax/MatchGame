@@ -16,7 +16,6 @@ public class BuildingPurchasing : MonoBehaviour {
 	public bool alertTextActive = false;
 	public bool clicked = false;
 
-
 	void Awake() 
 	{
 		alertTextTimeRemaining = alertTextTimeout;
@@ -32,10 +31,10 @@ public class BuildingPurchasing : MonoBehaviour {
 			if (building.name != name)
 				continue;
 
-			int wood = PlayerPrefs.GetInt ("woodTotal");
-			int food = PlayerPrefs.GetInt ("foodTotal");
-			int stone = PlayerPrefs.GetInt ("stoneTotal");
-			int gold = PlayerPrefs.GetInt ("goldTotal");
+			int wood = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_woodTotal");
+			int food = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_foodTotal");
+			int stone = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_stoneTotal");
+			int gold = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_goldTotal");
 
 			if (wood >= building.wood &&
 			    stone >= building.stone &&
@@ -65,16 +64,16 @@ public bool purchase (string name)
 			Building building = GetBuilding (name);
 
 			if (building != null) {	
-				int wood = PlayerPrefs.GetInt ("woodTotal");
-				int food = PlayerPrefs.GetInt ("foodTotal");
-				int stone = PlayerPrefs.GetInt ("stoneTotal");
-				int gold = PlayerPrefs.GetInt ("goldTotal");
+				int wood = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_woodTotal");
+				int food = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_foodTotal");
+				int stone = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_stoneTotal");
+				int gold = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_goldTotal");
 				Debug.Log ("Wood, food, stone, gold: " + wood + ", " + food + ", " + stone + ", " + gold);
 
-				PlayerPrefs.SetInt ("woodTotal", wood - building.wood); // differences after purchase 
-				PlayerPrefs.SetInt ("foodTotal", food - building.food);
-				PlayerPrefs.SetInt ("stoneTotal", stone - building.stone);
-				PlayerPrefs.SetInt ("goldTotal", gold - building.gold);
+				PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_woodTotal", wood - building.wood); // differences after purchase 
+				PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_foodTotal", food - building.food);
+				PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_stoneTotal", stone - building.stone);
+				PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_goldTotal", gold - building.gold);
 
 				Debug.Log ("Wood, food, stone, gold: " + (wood - building.wood) + ", " + (food - building.food) + ", " + (stone - building.stone) + ", " + (gold - building.gold));
 
