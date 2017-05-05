@@ -43,10 +43,10 @@ public class BuildingPurchasing : MonoBehaviour {
 	private void UpdateUI()
 	{
 
-		woodTotalUI.text = "Total wood: " + Game.current.PlayerOne.name + "_woodTotal";
+		/*woodTotalUI.text = "Total wood: " + Game.current.PlayerOne.name + "_woodTotal";
 		goldTotalUI.text = "Total gold: " + Game.current.PlayerOne.name + "_goldTotal";
 		stoneTotalUI.text = "Total stone: " + Game.current.PlayerOne.name + "_stoneTotal";
-		foodTotalUI.text = "Total food: "+ Game.current.PlayerOne.name + "_foodTotal";
+		foodTotalUI.text = "Total food: "+ Game.current.PlayerOne.name + "_foodTotal";*/
 
 	}
 	public bool checkCost (string name) 
