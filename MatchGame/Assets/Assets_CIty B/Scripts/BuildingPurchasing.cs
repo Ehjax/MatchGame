@@ -83,13 +83,13 @@ public class BuildingPurchasing : MonoBehaviour {
 		}
 	}
 public bool purchase (string name)
-			{ 
-		if (!checkCost (name))
+			{
+		if (checkCost (name))
 		{
-			Building building = GetBuilding (name);
+            Building building = GetBuilding (name);
 
-			if (building != null) {	
-				int wood = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_woodTotal");
+			if (building != null) {
+                int wood = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_woodTotal");
 				int food = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_foodTotal");
 				int stone = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_stoneTotal");
 				int gold = PlayerPrefs.GetInt (Game.current.PlayerOne.name + "_goldTotal");
@@ -100,6 +100,7 @@ public bool purchase (string name)
 				PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_stoneTotal", stone - building.stone);
 				PlayerPrefs.SetInt (Game.current.PlayerOne.name + "_goldTotal", gold - building.gold);
 
+                Debug.Log(building.name + "(" + name + "): " + building.wood + ", " + building.food + ", " + building.stone + ", " + building.gold);
 				Debug.Log ("Wood, food, stone, gold: " + (wood - building.wood) + ", " + (food - building.food) + ", " + (stone - building.stone) + ", " + (gold - building.gold));
 
 				PlayerPrefs.SetInt (name, 1); 
@@ -115,7 +116,7 @@ public bool purchase (string name)
 	{
 		foreach (Building building in buildings) 
 		{
-			if (building.name != name)
+			if (building.name == name)
 				return building;
 		}
 
