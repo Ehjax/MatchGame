@@ -29,9 +29,15 @@ public class Buy_Bakery : MonoBehaviour {
 			BuildingPurchasing.SINGLETON.currentBuilt++;
 			BuildingPurchasing.SINGLETON.checkTier ();
 			Camera.main.transform.position = new Vector3 (274, 2, 200);
+
+			GetComponent<Image> ().color = Color.black;
+
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
+
+			alertText.SetActive (true);
+			StartCoroutine (GoAway (alertText, 3.0F)); // 1 second
 			//alertText.SetActive (true);
 			BuildingPurchasing.SINGLETON.alertTextActive = true;
 			GetComponent<Image> ().color = Color.red;
@@ -39,5 +45,12 @@ public class Buy_Bakery : MonoBehaviour {
 		}
 
 		//Purchase.gameObject.SetActive(false);
+	}
+
+	IEnumerator GoAway(GameObject alertText, float delay)
+	{
+		alertText.SetActive (true);
+		yield return new WaitForSeconds(delay);
+		alertText.SetActive(false);
 	}
 }

@@ -96,7 +96,8 @@ public class MoveCamera : MonoBehaviour {
 
 				Vector3 move = new Vector3(pos.x * panSpeed, pos.y * panSpeed, 0);
 				transform.Translate(move, Space.Self);
-			if (Camera.main.transform.position.x > max_X)
+		/*
+			 * if (Camera.main.transform.position.x > max_X)
 				Camera.main.transform.position = new Vector3 (max_X, Camera.main.transform.position.x, Camera.main.transform.position.y);
 			if (Camera.main.transform.position.x < min_X)
 				Camera.main.transform.position = new Vector3 (min_X, Camera.main.transform.position.x, Camera.main.transform.position.y);
@@ -104,7 +105,7 @@ public class MoveCamera : MonoBehaviour {
 				Camera.main.transform.position = new Vector3 (Camera.main.transform.position.x,max_Y , Camera.main.transform.position.y);
 			if (Camera.main.transform.position.y < min_Y)
 				Camera.main.transform.position = new Vector3 (Camera.main.transform.position.x, min_Y, Camera.main.transform.position.y);
-		
+		*/
 			}
 
 
@@ -115,10 +116,12 @@ public class MoveCamera : MonoBehaviour {
 
 				Vector3 move = pos.y * zoomSpeed * transform.forward; 
 				transform.Translate(move, Space.World);
+			/*
 			if (Camera.main.transform.position.z > max_Z)
 				Camera.main.transform.position = new Vector3 (Camera.main.transform.position.x, Camera.main.transform.position.y, max_Z);
 			if (Camera.main.transform.position.z < min_Z)
 				Camera.main.transform.position = new Vector3 (Camera.main.transform.position.x, Camera.main.transform.position.y, min_Z);
+*/
 			}
 
 

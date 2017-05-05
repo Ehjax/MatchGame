@@ -30,16 +30,27 @@ public class Buy_Wall : MonoBehaviour {
 			BuildingPurchasing.SINGLETON.currentBuilt++;
 			BuildingPurchasing.SINGLETON.checkTier ();
 			Camera.main.transform.position = new Vector3 (229, 1, 184);
+			GetComponent<Image> ().color = Color.black;
+
 
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
-			alertText.SetActive (false);
 
+			alertText.SetActive (true);
+			StartCoroutine (GoAway (alertText, 3.0F)); // 1 second
 			Debug.Log ("You don't have enough for that");
 		}
 
 		//Purchase.gameObject.SetActive(false);
 		GetComponent<Image> ().color = Color.red;
+	}
+
+
+	IEnumerator GoAway(GameObject alertText, float delay)
+	{
+		alertText.SetActive (true);
+		yield return new WaitForSeconds(delay);
+		alertText.SetActive(false);
 	}
 }

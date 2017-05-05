@@ -27,15 +27,28 @@ public class Buy_Farm : MonoBehaviour {
 			BuildingPurchasing.SINGLETON.currentBuilt++;
 			BuildingPurchasing.SINGLETON.checkTier ();
 			Camera.main.transform.position = new Vector3 (240, 5, 210);
+			GetComponent<Image> ().color = Color.black;
+
 
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
+
+			alertText.SetActive (true);
+			StartCoroutine (GoAway (alertText, 3.0F)); // 1 second
 			alertText.SetActive (true);
 			Debug.Log ("You don't have enough for that");
 			GetComponent<Image> ().color = Color.red;
 		}
 
 		//Purchase.gameObject.SetActive(false);
+	}
+
+
+	IEnumerator GoAway(GameObject alertText, float delay)
+	{
+		alertText.SetActive (true);
+		yield return new WaitForSeconds(delay);
+		alertText.SetActive(false);
 	}
 }

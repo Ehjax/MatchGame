@@ -28,18 +28,29 @@ public class Buy_Warehouse : MonoBehaviour {
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Warehouse");
 			BuildingPurchasing.SINGLETON.currentBuilt++;
 			BuildingPurchasing.SINGLETON.checkTier ();
-			Camera.main.transform.position = new Vector3 (188, 9, 191);
+			Camera.main.transform.position = new Vector3 (192, 11, 191);
+			GetComponent<Image> ().color = Color.black;
+
 
 
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
-			alertText.SetActive (false);
 
+			alertText.SetActive (true);
+			StartCoroutine (GoAway (alertText, 3.0F)); // 1 second
 			Debug.Log ("You don't have enough for that");
 		}
 
 		//Purchase.gameObject.SetActive(false);
 		GetComponent<Image> ().color = Color.red;
+	}
+
+
+	IEnumerator GoAway(GameObject alertText, float delay)
+	{
+		alertText.SetActive (true);
+		yield return new WaitForSeconds(delay);
+		alertText.SetActive(false);
 	}
 }

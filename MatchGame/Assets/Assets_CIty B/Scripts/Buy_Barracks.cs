@@ -28,11 +28,16 @@ public class Buy_Barracks : MonoBehaviour {
 			GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().purchase ("Barracks");
 			BuildingPurchasing.SINGLETON.currentBuilt++;
 			BuildingPurchasing.SINGLETON.checkTier ();
-			Camera.main.transform.position = new Vector3 (210, 4, 225);
+			Camera.main.transform.position = new Vector3 (210, 12, 225);
+			GetComponent<Image> ().color = Color.black;
+
 
 		} 
 		else if (!GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing>().checkCost("name"))
 		{
+
+			alertText.SetActive (true);
+			StartCoroutine (GoAway (alertText, 3.0F)); // 1 second
 			GetComponent<Image> ().color = Color.red;
 			Debug.Log ("You don't have enough for that");
 			alertText.SetActive (true);
@@ -40,5 +45,13 @@ public class Buy_Barracks : MonoBehaviour {
 		}
 
 		//Purchase.gameObject.SetActive(false);
+	}
+
+
+	IEnumerator GoAway(GameObject alertText, float delay)
+	{
+		alertText.SetActive (true);
+		yield return new WaitForSeconds(delay);
+		alertText.SetActive(false);
 	}
 }

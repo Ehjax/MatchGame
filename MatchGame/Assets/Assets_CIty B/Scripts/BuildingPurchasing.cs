@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class BuildingPurchasing : MonoBehaviour {
@@ -15,14 +16,38 @@ public class BuildingPurchasing : MonoBehaviour {
 	private float alertTextTimeRemaining; 
 	public bool alertTextActive = false;
 	public bool clicked = false;
+	[Tooltip("Shows the total wood for the whole game.")]
+	public Text woodTotalUI = null;
+	[Tooltip("Shows the total gold for the whole game.")]
+	public Text goldTotalUI = null;
+	[Tooltip("Shows the total stone for the whole game.")]
+	public Text stoneTotalUI = null;
+	[Tooltip("Shows the total food for the whole game.")]
+	public Text foodTotalUI = null;
+
+	private int woodTotal = 0;
+	private int goldTotal = 0;
+	private int stoneTotal = 0;
+	private int foodTotal = 0;
+
 
 	void Awake() 
 	{
+		
 		alertTextTimeRemaining = alertTextTimeout;
 		if (BuildingPurchasing.SINGLETON == null)
 			SINGLETON = this;
 		else Debug.LogError("Building Purchasing SINGLETON Already exists");
 		setUp ();
+	}
+	private void UpdateUI()
+	{
+
+		woodTotalUI.text = "Total wood: " + Game.current.PlayerOne.name + "_woodTotal";
+		goldTotalUI.text = "Total gold: " + Game.current.PlayerOne.name + "_goldTotal";
+		stoneTotalUI.text = "Total stone: " + Game.current.PlayerOne.name + "_stoneTotal";
+		foodTotalUI.text = "Total food: "+ Game.current.PlayerOne.name + "_foodTotal";
+
 	}
 	public bool checkCost (string name) 
 		{
