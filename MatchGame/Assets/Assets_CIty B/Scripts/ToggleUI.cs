@@ -8,6 +8,7 @@ using UnityEngine;
 public class ToggleUI : MonoBehaviour {
 	public Button Toggle;
 
+	public Button Buy_Items;
 	public Button Buy_House;
 	public Button Buy_House2;
 	public Button Buy_House3;
@@ -54,6 +55,8 @@ public class ToggleUI : MonoBehaviour {
 		Buy_Farm.gameObject.SetActive (false);
 		Buy_Bakery.gameObject.SetActive (false);
 		Buy_Warehouse.gameObject.SetActive(false);
+		Buy_Items.gameObject.SetActive(true);
+
 }
 
 }

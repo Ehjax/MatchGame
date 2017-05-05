@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public Menu currentMenu;
-
+	#region
     /* Dean's OnGUI() code
 	void OnGUI () {
 
@@ -93,6 +93,7 @@ public class MainMenu : MonoBehaviour {
 		GUILayout.EndArea();
 
 	}*/
+	#endregion
 
     public bool eraseAllPlayerPrefs = false;
     public GameObject titleScreen = null;
