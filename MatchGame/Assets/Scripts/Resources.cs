@@ -211,7 +211,7 @@ public class Resources : MonoBehaviour
         woodBonus = 0;
         stoneBonus = 0;
         goldBonus = 0;
-        maxMoves = 0;
+        int movesBonus = 0;
 
         if(PlayerPrefs.GetInt(currPlayerName + "_HouseCount") > 0)
         {
@@ -220,7 +220,7 @@ public class Resources : MonoBehaviour
             woodBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
             stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
             goldBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
-            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
+            movesBonus += PlayerPrefs.GetInt(currPlayerName + "_HouseCount");
         }
         if (PlayerPrefs.GetInt(currPlayerName + "_MineCount") > 0)
         {
@@ -250,7 +250,7 @@ public class Resources : MonoBehaviour
             woodBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
             stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
             goldBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
-            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
+            movesBonus += PlayerPrefs.GetInt(currPlayerName + "_WarehouseCount");
         }
         if (PlayerPrefs.GetInt(currPlayerName + "_BakeryCount") > 0)
         {
@@ -279,7 +279,7 @@ public class Resources : MonoBehaviour
         {
             PrintDebugMsg("BarracksCount: " + PlayerPrefs.GetInt(currPlayerName + "_BarracksCount"));
             woodBonus += PlayerPrefs.GetInt(currPlayerName + "_BarracksCount");
-            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_BarracksCount");
+            movesBonus += PlayerPrefs.GetInt(currPlayerName + "_BarracksCount");
         }
         if (PlayerPrefs.GetInt(currPlayerName + "_MainGateCount") > 0)
         {
@@ -292,7 +292,7 @@ public class Resources : MonoBehaviour
             woodBonus += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
             stoneBonus += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
             goldBonus += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
-            maxMoves += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
+            movesBonus += PlayerPrefs.GetInt(currPlayerName + "_MarketCount");
         }
         if (PlayerPrefs.GetInt(currPlayerName + "_DairyCount") > 0)
         {
@@ -310,7 +310,9 @@ public class Resources : MonoBehaviour
             foodBonus += PlayerPrefs.GetInt(currPlayerName + "_SlaughterhouseCount");
         }
 
-        PrintDebugMsg("Bonuses (Food/Wood/Stone/Gold/Moves): " + foodBonus + "/" + woodBonus + "/" + stoneBonus + "/" + goldBonus + "/" + maxMoves);
+        maxMoves += movesBonus;
+        currMoves += maxMoves;
+        PrintDebugMsg("Bonuses (Food/Wood/Stone/Gold/Moves): " + foodBonus + "/" + woodBonus + "/" + stoneBonus + "/" + goldBonus + "/" + movesBonus);
     }
     #endregion
 
