@@ -33,13 +33,9 @@ public static class SaveLoad {
         {
             if (SaveLoad.savedGames.Contains(game))
             {
-                Debug.Log("Saves before delete: " + SaveLoad.savedGames.Count);
                 SaveLoad.savedGames.Remove(game);
-                Debug.Log("Saves after delete: " + SaveLoad.savedGames.Count);
                 Save(true);
-                Debug.Log("Saves after save: " + SaveLoad.savedGames.Count);
                 Load();
-                Debug.Log("Saves after load: " + SaveLoad.savedGames.Count);
             }
         }
     }
