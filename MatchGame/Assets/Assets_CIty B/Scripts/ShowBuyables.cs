@@ -24,7 +24,7 @@ public class ShowBuyables : MonoBehaviour {
 	public Button Buy_Bakery;
 	public Button Buy_Farm;
 	public Button Buy_Warehouse;
-
+	public GameObject priceDisplay;
 
 
 
@@ -50,6 +50,7 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Warehouse.gameObject.SetActive(false);
 		Buy_Farm.gameObject.SetActive(false);
 		Buy_Bakery.gameObject.SetActive(false);
+		priceDisplay.gameObject.SetActive (true);
 		// get the Buy_Items button
 		Button btn = Buy_Items.GetComponent<Button>();
 		// add event listener to it
@@ -76,8 +77,7 @@ public class ShowBuyables : MonoBehaviour {
 		Buy_Farm.gameObject.SetActive(true);
 		Buy_Bakery.gameObject.SetActive(true);
 		Buy_Warehouse.gameObject.SetActive(true);
-
-
+		priceDisplay.gameObject.SetActive (true);
 
 
 

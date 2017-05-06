@@ -27,6 +27,7 @@ public class ToggleUI : MonoBehaviour {
 	public Button Buy_Bakery;
 	public Button Buy_Farm;
 	public Button Buy_Warehouse;
+	public GameObject priceDisplay;
 
 
 	void Start () {
@@ -55,6 +56,7 @@ public class ToggleUI : MonoBehaviour {
 		Buy_Farm.gameObject.SetActive (false);
 		Buy_Bakery.gameObject.SetActive (false);
 		Buy_Warehouse.gameObject.SetActive(false);
+		priceDisplay.gameObject.SetActive (false);
 		Buy_Items.gameObject.SetActive(true);
 
 }
