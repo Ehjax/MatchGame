@@ -10,13 +10,28 @@ public class Buy_Windmill : MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_WindmillCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(windmillPrefab, new Vector3(223, 1, 206), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_WindmillCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(windmillPrefab, new Vector3(223, 1, 206), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a windmill!");
 
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Windmill")) 

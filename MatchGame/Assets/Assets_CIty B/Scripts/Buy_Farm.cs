@@ -10,13 +10,28 @@ public class Buy_Farm : MonoBehaviour {
 	public GameObject alertText;
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_FarmCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(farmPrefab, new Vector3(240, 5, 230), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_FarmCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(farmPrefab, new Vector3(240, 5, 230), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Farm!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Farm")) 
 		{

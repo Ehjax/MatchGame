@@ -11,6 +11,12 @@ public class Buy_Wall : MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_WallsCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(WallPrefab, new Vector3(229, 1, 204), Quaternion.identity);
+        }
+
 		gameObject.GetComponent<ParticleSystem> ();
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
@@ -18,7 +24,16 @@ public class Buy_Wall : MonoBehaviour {
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_WallsCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(WallPrefab, new Vector3(229, 1, 204), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a City Wall!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Wall")) 
 		{

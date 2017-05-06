@@ -11,6 +11,12 @@ public class Buy_Bakery : MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_BakeryCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(bakeryPrefab, new Vector3(274, 2, 230), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		//alertText.SetActive (false);
@@ -18,7 +24,16 @@ public class Buy_Bakery : MonoBehaviour {
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_BakeryCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(bakeryPrefab, new Vector3(274, 2, 230), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Bakery!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Bakery")) 
 		{
