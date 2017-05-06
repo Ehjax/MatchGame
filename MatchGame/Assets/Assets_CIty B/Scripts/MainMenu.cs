@@ -131,6 +131,7 @@ public class MainMenu : MonoBehaviour {
     public void Continue()
     {
         currentMenu = Menu.Continue;
+        SaveLoad.Load();
         
         foreach(Game game in SaveLoad.savedGames)
         {
