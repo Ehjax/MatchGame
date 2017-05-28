@@ -10,13 +10,28 @@ public class Buy_mainGate: MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_MainGateCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(mainGatePrefab, new Vector3(174, 10, 269), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_MainGateCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(mainGatePrefab, new Vector3(174, 10, 269), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Main Gate!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("mainGate")) 
 		{

@@ -12,13 +12,29 @@ public class Buy_Barracks : MonoBehaviour {
 
 
 	void Start () {
+
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_BarracksCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(BarracksPrefab, new Vector3(210, 4, 245), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_BarracksCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(BarracksPrefab, new Vector3(210, 4, 245), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Barracks!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Barracks")) 
 		{

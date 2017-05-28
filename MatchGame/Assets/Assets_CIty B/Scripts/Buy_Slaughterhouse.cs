@@ -11,13 +11,28 @@ public class Buy_Slaughterhouse : MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_SlaughterhouseCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(slaughterPrefab, new Vector3(272, 5, 264), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_SlaughterhouseCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(slaughterPrefab, new Vector3(272, 5, 264), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Slaughterhouse!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Slaughterhouse")) 
 		{

@@ -11,13 +11,28 @@ public class Buy_Warehouse : MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_WarehouseCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(warehousePrefab, new Vector3(188, 9, 211), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_WarehouseCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(warehousePrefab, new Vector3(188, 9, 211), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Slaughterhouse!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Slaughterhouse")) 
 		{

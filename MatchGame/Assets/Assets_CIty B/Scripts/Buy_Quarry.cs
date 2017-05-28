@@ -10,13 +10,28 @@ public class Buy_Quarry : MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_QuarryCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(quarryPrefab, new Vector3(241, 3, 287), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_QuarryCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(quarryPrefab, new Vector3(241, 3, 287), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Quarry!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Quarry")) 
 		{

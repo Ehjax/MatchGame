@@ -11,13 +11,28 @@ public class Buy_Sawmill : MonoBehaviour {
 
 
 	void Start () {
+        if(PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_LumberCampCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(sawmillPrefab, new Vector3(210, 3, 334), Quaternion.identity);
+        }
+
 		Button btn = Purchase.GetComponent<Button>();
 		btn.onClick.AddListener(TaskOnClick);
 		alertText.SetActive (false);
 
 	}
 
-	public void TaskOnClick(){
+    private void Update()
+    {
+        if (PlayerPrefs.GetInt(Game.current.PlayerOne.name + "_LumberCampCount") > 0)
+        {
+            gameObject.SetActive(false);
+            Instantiate(sawmillPrefab, new Vector3(210, 3, 334), Quaternion.identity);
+        }
+    }
+
+    public void TaskOnClick(){
 		Debug.Log ("You bought a Sawmill!");
 		if (GameObject.Find ("Main Camera").GetComponent<BuildingPurchasing> ().checkCost("Sawmill")) 
 		{
